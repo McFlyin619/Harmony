@@ -1,0 +1,18 @@
+
+ion-card-content {
+    text-align: center;
+    --ion-card-background:#F5F4F5;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+ion-button {
+    margin-top: 20px;
+    font-size: 20px;
+    text-shadow: 2px 2px 3px black;
+
+    ion-icon{
+        margin-left: 20px;
+        font-size: 20px;
+    }
+}

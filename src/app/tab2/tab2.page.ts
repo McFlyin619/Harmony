@@ -7,6 +7,15 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
+  messageText = '';
+  pictureUrl = '';
   constructor() {}
+
+  messageSend() {
+    console.log("Message:",this.messageText, "|| URL:", this.pictureUrl);
+    this.messageText ='';
+    this.pictureUrl = '';
+  }
+
 
 }
