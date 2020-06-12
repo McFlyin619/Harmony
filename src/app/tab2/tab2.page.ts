@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { Message } from '../models/message';
+import { SharedService } from '../services/shared.service';
+import { DataService } from '../services/data.service';
+
 
 @Component({
   selector: 'app-tab2',
@@ -8,26 +11,19 @@ import { ToastController } from '@ionic/angular';
 })
 export class Tab2Page {
 
-  messageText = '';
-  pictureUrl = '';
+  model: Message = new Message();
 
-  constructor(public toastController: ToastController) {}
+  constructor(private shared: SharedService, private data: DataService) {}
 
   messageSend() {
-    console.log("Message:",this.messageText, "|| URL:", this.pictureUrl);
-    this.messageText ='';
-    this.pictureUrl = '';
-    this.presentToast();
-  }
-
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'Message Posted!',
-      duration: 6000,
-      position: 'top',
-      color: 'primary'
-    });
-    toast.present();
+    this.model.from = this.shared.userName;
+    // call save function on dataservice
+    this.data.saveMessage(this.model);
+    console.log('Saved:', this.model);
+    
+    // clear form
+    this.model = new Message();
+    
   }
 
 }
