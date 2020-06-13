@@ -12,15 +12,15 @@ export class Tab1Page implements OnInit {
 
   messagesToDisplay:  Message[];
 
-  constructor(private data: DataService, private shared: SharedService) {}
+  constructor(private data: DataService, private shared: SharedService) {
+    this.data.getAllMessages().subscribe( list => {
+      this.messagesToDisplay = list;
+    });
+
+  }
 
   ngOnInit() {
     
-  }
-
-  getData() {
-    this.messagesToDisplay = this.data.getAllMessages();
-    return this.messagesToDisplay;
   }
 
 }

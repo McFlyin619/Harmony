@@ -17,6 +17,7 @@ export class Tab2Page {
 
   messageSend() {
     this.model.from = this.shared.userName;
+    this.model.fromPro = this.shared.profile;
     // call save function on dataservice
     this.data.saveMessage(this.model);
     console.log('Saved:', this.model);

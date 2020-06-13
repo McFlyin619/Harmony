@@ -8,17 +8,41 @@
 
 <ion-content [fullscreen]="true">
  <!-- page content -->
+  <ion-list-header lines="full">
+    <ion-label>Messages</ion-label>
+  </ion-list-header>
 
-<ion-item *ngFor="let message of getData()" lines="none">
-  <ion-avatar slot="start">
-    <ion-icon name="chatbubble-ellipses-sharp"></ion-icon>
-  </ion-avatar>
-  <ion-label ion-item-sliding >
-    <h1>{{ message.from }}</h1>
-    <h3>{{ message.text }}
-      <br>
-    <small>{{ message.createdOn }}</small></h3>
-  </ion-label>
-</ion-item>
+  <!-- <ion-card>
+    <ion-card-header>
+      <ion-avatar>
+        <img src="../assets/img/IMG_3911.JPG">
+      </ion-avatar>
+      <ion-card-title>OBrien</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Hey there guys! Hey there guys!Hey there guys!Hey there guys!Hey there 
+    </ion-card-content>
+    <ion-card-subtitle>
+      <small>Fri Jun 12th</small>
+    </ion-card-subtitle>
+  </ion-card> -->
+
+  <ion-card *ngFor="let message of messagesToDisplay">
+    <ion-card-header>
+      <ion-avatar>
+        <img src="{{ message.fromPro }}">
+      </ion-avatar>
+      <ion-card-title>
+        {{ message.from }}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ message.text }}
+      <img src="{{ message.imageUrl }}" alt="pic" *ngIf='message.imageUrl'> 
+    </ion-card-content>
+    <ion-card-subtitle>
+      <small>{{ message.createdOn }}</small>
+    </ion-card-subtitle>
+  </ion-card>
 
 </ion-content>

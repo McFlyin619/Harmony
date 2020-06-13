@@ -3,6 +3,7 @@ export class Message {
     imageUrl: string;
     createdOn: Date;
     from: string;
+    fromPro: string;
     to: string;
 
     constructor() {
