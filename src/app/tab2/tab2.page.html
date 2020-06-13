@@ -24,6 +24,16 @@
         <ion-input name="picture" [(ngModel)]="model.imageUrl"></ion-input>
       </ion-item>
 
+      <ion-item>
+        <ion-label position="floating">
+          To:
+        </ion-label>
+        <ion-select [(ngModel)]="model.to" name="to" interface="action-sheet">
+          <ion-select-option value="Everyone">General</ion-select-option>
+          <ion-select-option *ngFor="let friend of myFriends" [value]="friend.name">{{ friend.name }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
       <ion-button expand="block" color="secondary" (click)="messageSend()">Shout It
         <ion-icon name="megaphone-outline"></ion-icon>
       </ion-button>

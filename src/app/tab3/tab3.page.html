@@ -7,5 +7,36 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <h3>Guess what?....Coming Soon...</h3>
+
+  <ion-card>
+    <ion-card-content>
+
+      <ion-item>
+        <ion-label position="floating">
+          Friend Name
+        </ion-label>
+        <ion-input name="friend" [(ngModel)]="model.name"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" color="secondary" (click)="saveFriend()">
+        Add Friend
+        <ion-icon name="person-add-outline"></ion-icon>
+      </ion-button>
+      
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list-header lines="full">
+    <ion-label>Friends</ion-label>
+  </ion-list-header>
+<!-- List of my Friends -->
+  <ion-list *ngFor="let friend of friendsToDisplay" lines="none">
+    <ion-item>
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>{{ friend.name }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+
+
 </ion-content>

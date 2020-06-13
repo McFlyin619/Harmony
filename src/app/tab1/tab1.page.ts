@@ -14,7 +14,13 @@ export class Tab1Page implements OnInit {
 
   constructor(private data: DataService, private shared: SharedService) {
     this.data.getAllMessages().subscribe( list => {
-      this.messagesToDisplay = list;
+      this.messagesToDisplay = [];
+      for(let i=0; i< list.length; i++) {
+        let message = list[i];
+        if(message.from == shared.userName || message.to == shared.userName || message.to == "Everyone") {
+          this.messagesToDisplay.push(message);
+        }
+      }
     });
 
   }

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class SharedService {
 
   public userName = "OBrien";
-  public profile = "../assets/img/IMG_3911.JPG"
+  
 
   constructor() { }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Message } from '../models/message';
 import { SharedService } from '../services/shared.service';
 import { DataService } from '../services/data.service';
+import { Friend } from '../models/friend';
 
 
 @Component({
@@ -12,12 +13,23 @@ import { DataService } from '../services/data.service';
 export class Tab2Page {
 
   model: Message = new Message();
+  myFriends: Friend[] = [];  
 
-  constructor(private shared: SharedService, private data: DataService) {}
+  constructor(private shared: SharedService, private data: DataService) {
+    this.data.getAllFriends().subscribe(list => {
+      this.data.getAllFriends().subscribe(list => {
+       for(let i=0; i< list.length; i++) {
+         let friend = list[i];
+         if(friend.friendOf == this.shared.userName) {
+            this.myFriends.push(friend);
+         }
+       }
+      });
+    });
+  }
 
   messageSend() {
     this.model.from = this.shared.userName;
-    this.model.fromPro = this.shared.profile;
     // call save function on dataservice
     this.data.saveMessage(this.model);
     console.log('Saved:', this.model);
