@@ -10,6 +10,10 @@
  <!-- page content -->
   <ion-list-header lines="full">
     <ion-label>Messages</ion-label>
+    <ion-select interface="action-sheet">
+      <ion-select-option value="Everyone">General</ion-select-option>
+      <ion-select-option (click)="user1(friend.name)" *ngFor="let friend of myFriends" [value]="friend.name">{{ friend.name }}</ion-select-option>
+    </ion-select>
   </ion-list-header>
 
   <ion-card *ngFor="let message of messagesToDisplay">

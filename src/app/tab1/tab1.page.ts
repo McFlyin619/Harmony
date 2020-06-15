@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { SharedService } from '../services/shared.service';
 import { Message } from '../models/message';
+import { Friend } from '../models/friend';
 
 @Component({
   selector: 'app-tab1',
@@ -11,22 +12,19 @@ import { Message } from '../models/message';
 export class Tab1Page implements OnInit {
 
   messagesToDisplay:  Message[];
+  myFriends: Friend[] = [];
+  userMessages = [];
 
   constructor(private data: DataService, private shared: SharedService) {
     this.data.getAllMessages().subscribe( list => {
-      this.messagesToDisplay = [];
-      for(let i=0; i< list.length; i++) {
-        let message = list[i];
-        if(message.from == shared.userName || message.to == shared.userName || message.to == "Everyone") {
-          this.messagesToDisplay.push(message);
-        }
-      }
+      this.messagesToDisplay = list.filter(message => message.to == shared.userName || message.from == shared.userName || message.to == "Everyone");
     });
-
+    this.data.getAllFriends().subscribe(list => {
+      this.myFriends = list.filter(friend => friend.friendOf == shared.userName);
+    });
   }
+  
+  ngOnInit() {}
 
-  ngOnInit() {
-    
-  }
 
 }

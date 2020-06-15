@@ -17,14 +17,7 @@ export class Tab2Page {
 
   constructor(private shared: SharedService, private data: DataService) {
     this.data.getAllFriends().subscribe(list => {
-      this.data.getAllFriends().subscribe(list => {
-       for(let i=0; i< list.length; i++) {
-         let friend = list[i];
-         if(friend.friendOf == this.shared.userName) {
-            this.myFriends.push(friend);
-         }
-       }
-      });
+      this.myFriends = list.filter(friend => friend.friendOf == shared.userName);
     });
   }
 
