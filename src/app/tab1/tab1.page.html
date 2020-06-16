@@ -26,6 +26,7 @@
       {{ message.text }}
       <img src="{{ message.imageUrl }}" alt="pic" *ngIf='message.imageUrl'> 
     </ion-card-content>
+    <ion-footer>{{ message.createdOn | date:'hh:mm:ss -- MM-dd-yyyy' }}</ion-footer>
   </ion-card>
 
 </ion-content>

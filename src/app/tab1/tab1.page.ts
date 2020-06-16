@@ -9,22 +9,23 @@ import { Friend } from '../models/friend';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page implements OnInit {
+export class Tab1Page {
 
   messagesToDisplay:  Message[];
   myFriends: Friend[] = [];
   userMessages = [];
 
   constructor(private data: DataService, private shared: SharedService) {
-    this.data.getAllMessages().subscribe( list => {
+    this.data.getAllMessages().subscribe(list => {
       this.messagesToDisplay = list.filter(message => message.to == shared.userName || message.from == shared.userName || message.to == "Everyone");
-    });
-    this.data.getAllFriends().subscribe(list => {
-      this.myFriends = list.filter(friend => friend.friendOf == shared.userName);
+
+      this.messagesToDisplay = this.messagesToDisplay.sort(function(a,b){
+        if(a.createdOn < b.createdOn) {
+          return -1; // put a,b
+        }
+        return 1; // put b, a.
+      });
     });
   }
-  
-  ngOnInit() {}
-
-
 }
+

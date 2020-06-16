@@ -10,6 +10,7 @@ import { Friend } from '../models/friend';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
+
 export class Tab2Page {
 
   model: Message = new Message();
@@ -23,13 +24,8 @@ export class Tab2Page {
 
   messageSend() {
     this.model.from = this.shared.userName;
-    // call save function on dataservice
     this.data.saveMessage(this.model);
     console.log('Saved:', this.model);
-    
-    // clear form
     this.model = new Message();
-    
   }
-
 }

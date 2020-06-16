@@ -3,7 +3,9 @@ import { Message } from '../models/message';;
 
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators'
 import { Friend } from '../models/friend';
+import { firestore } from 'firebase';
 
 
 @Injectable({
@@ -26,7 +28,6 @@ export class DataService {
   }
 
   public saveMessage(message) {
-    // push to DB
     var item = Object.assign({}, message);
     this.messageCollection.add(item); // Save to DB
   }
@@ -37,7 +38,16 @@ export class DataService {
   }
 
   private retrieveMessages() {
-    this.allMessages = this.messageCollection.valueChanges();
+    this.allMessages = this.messageCollection.snapshotChanges().pipe(
+      map( actions => {
+        return actions.map(m => {
+          var data = m.payload.doc.data();
+          var thierDate: any = data.createdOn;
+          data.createdOn = new firestore.Timestamp(thierDate.seconds, thierDate.nanoseconds).toDate();
+          return {... data};
+        });
+      })
+    );
   }
 
   private retieveFriends() {
